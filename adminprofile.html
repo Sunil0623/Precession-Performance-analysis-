@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container.mt-4{
+            border-radius:4px;
+            background-color:whitesmoke;
+            margin-bottom: 2rem;
+            padding: 10px;
+            box-shadow: 10px 10px 10px  10px rgba(0.5,0.5,0.5,0.5);
+        .background{
+            background-color: white;
+        }
+        
+    </style>
+</head>
+<body class="background">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+        <a class="navbar-brand" href="#" ><img src="cafeteria.png" alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admindashboard.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="adminprofile.html">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Edit Profile Form -->
+    <div class="container mt-4">
+        <h2>Edit Profile</h2>
+        <form class="design">
+             <div class="form-group">
+                 <label class="block text-gray-700 text-sm font-bold mb-2" for="profileImage">
+                    Profile Photo:
+                  </label>
+                    <input type="file" accept="image/*" class="form-input" id="profileImage" name="profileImage">
+                        <p class="text-gray-600 text-xs mt-1">Upload a profile image (JPG, PNG, or GIF).</p>
+             </div>
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea class="form-control" id="bio" rows="4" placeholder="Tell us about yourself"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-primary"><a href="admindashboard.html" style="color: white;text-decoration: none" >Back</a></button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

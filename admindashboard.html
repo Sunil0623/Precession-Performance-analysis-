@@ -1,0 +1,631 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Panel</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <style>
+            .bg-blue-500.p-4.flex.items-center.justify-between{
+                position: fixed;
+                width: 100%;
+                height: 48px;
+            }
+            .sidebar{
+                margin-top: 3rem;
+                position: fixed;
+            }
+
+
+            .container-contents {
+                display: none;
+                width: calc(100% - 260px);
+                float: right;
+                padding: 0 20px;
+
+            }
+            .mb-5{
+                width: 100%;
+                height: 100%;
+
+            }
+            /*    @media only screen and (max-width :768px){*/
+            .content-area{
+                margin-left: 20%;
+                margin-top: 20px;
+                padding:20px;
+                position: fixed;
+
+            }
+            .flex .items-center .justify-center{
+                position: relative;
+            }
+            .input{
+                width: 100%;
+                border: 1px solid rgb(59, 58, 58);
+            }
+            /* Dropdown Styles */
+            .group {
+                position: relative;
+            }
+            /* Style for all tables */
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            /* Table header */
+            .table thead th {
+                background-color: #007bff;
+                color: #fff;
+                text-align: left;
+                padding: 10px;
+            }
+
+            /* Table rows */
+            .table tbody tr {
+                border-bottom: 1px solid #ddd;
+            }
+
+            /* Table row hover effect */
+            .table tbody tr:hover {
+                background-color: #f5f5f5;
+            }
+
+            /* Table cell padding */
+            .table td, .table th {
+                padding: 12px;
+            }
+
+            /* Add some spacing between tables */
+            .table + .table {
+                margin-top: 30px;
+            }
+
+            /* Dropdown Button Styles */
+            .group button {
+                cursor: pointer;
+            }
+
+            /* Dropdown Options Styles */
+            .group ul {
+                top: 100%;
+                right: 0;
+                min-width: 160px;
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                z-index: 10;
+            }
+
+            .group ul li {
+                padding: 8px 12px;
+                list-style: none;
+            }
+
+            .group ul li:hover {
+                background-color: #f0f0f0;
+            }
+            .Question{
+                background: fixed;
+                box-shadow: 10px 10px 10px  rgb(59, 58, 58);
+                border-radius: 4px ;
+                backdrop-filter: inherit;
+            }
+            #add-questions-content{
+                margin-left: 2%;
+                margin-top: 20px;
+                padding: auto;
+            }
+            .block.text-gray-800 .text-sm.font-bold.mb-2{
+                display: none;
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            #add-questions-content form {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            #add-questions-content input[type="text"],
+            #add-questions-content textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-100" >
+
+        <nav class="bg-blue-500 p-4 flex items-center justify-between">
+            <div>
+                <h1 class="text-white text-xl font-semibold">EDUFORD</h1>
+            </div>
+
+        </nav>
+
+        <div class="row" style="width: 100%;">
+            <div class="sidebar" style="width: 15%; float: left;">
+
+                <aside class="bg-gray-800 text-white min-h-screen p-0">
+                    <nav>
+                        <div class="grid gap-cols-3 row-gap-2 col-gap-4">
+                            <ul class="space">
+
+
+                                <li class="option-with-dropdown">
+                                    <div class="flex items-center justify-between p-2 hover:bg-gray-700">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-pen mr-2"></i>
+                                            <span>Exams</span>
+                                        </div>
+                                        <i class="fas fa-chevron-down text-xs"></i>
+                                    </div>
+                                    <ul class="dropdown-menu ml-4 hidden">
+                                        <li>
+                                            <a href="#add-exams-content" class="block p-2 hover:bg-gray-700 flex items-center" id="add-exams">
+                                                <i class="fas fa-chevron-right mr-2 text-xs"></i>
+                                                Add Exams
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="examlist.jsp" class="block p-2 hover:bg-gray-700 flex items-center" id="list-exams">
+                                                <i class="fas fa-chevron-right mr-2 text-xs" ></i>
+                                                List of Exams
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="option-with-dropdown">
+                                    <div class="flex items-center justify-between p-2 hover:bg-gray-700">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-question   mr-2"></i>
+                                            <span>Questions</span>
+                                        </div>
+                                        <i class="fas fa-chevron-down text-xs"></i>
+                                    </div>
+                                    <ul class="dropdown-menu ml-4 hidden">
+                                        <li>
+                                            <a href="#add-questions-content" class="block p-2 hover:bg-gray-700 flex items-center" id="add-questions">
+                                                <i class="fas fa-chevron-right mr-2 text-xs"></i>
+                                                Add Questions
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="questionlist.jsp" class="block p-2 hover:bg-gray-700 flex items-center" id="list-questions">
+                                                <i class="fas fa-chevron-right mr-2 text-xs"></i>
+                                                List of Questions
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+
+
+
+
+
+
+                                <li class="option-with-dropdown">
+                                    <div class="flex items-center justify-between p-2 hover:bg-gray-700">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-plus-square mr-2"></i>
+                                            <span>Schedule Exam</span>
+                                        </div>
+                                        <i class="fas fa-chevron-down text-xs"></i>
+                                    </div>
+                                    <ul class="dropdown-menu ml-4 hidden">
+                                        <li>
+                                            <a href="exam.jsp" class="block p-2 hover:bg-gray-700 flex items-center" id="add-section">
+                                                <i class="fas fa-chevron-right mr-2 text-xs"></i>
+                                                Schedule
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#list-section-content" class="block p-2 hover:bg-gray-700 flex items-center" id="list-section">
+<!--                                                <i class="fas fa-chevron-right mr-2 text-xs"></i>
+                                                List of Section-->
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            
+                         
+                                <div class="flex items-center justify-between p-2 hover:bg-gray-700">
+                                    <div class="flex items-center">
+                                        <li>
+                                            <form action="" method="post">
+                                                <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded">
+                                                    Logout
+                                                </button>
+                                            </form>
+                                           
+
+                                        </li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                                    </nav>
+                                    </aside>
+                                </div>
+
+                        </div>
+
+                        <div class="content-area" style="width: 70%;">
+                            <main class="container mx-auto p-4 " >
+                                <div class="grid gap-cols-3 row-gap-2 col-gap-5">
+
+                                    <div id="add-exams-content" class="hidden">
+                                        <h2 class="text-xl font-semibold mb-2">Add Exams</h2>
+
+                                        <form class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4" action="AddExamServlet" method="post">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examName">
+                                                    Exam Name:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examName" name="examName" type="text" placeholder="Enter exam name">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examType">
+                                                    Exam Type:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examType" type="text" name="examType" placeholder="Enter exam Type">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examDate">
+                                                    Exam Date:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examDate" name="examDate" type="date" placeholder="Enter exam date">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examDuration">
+                                                    Exam Duration:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examDuration" name="examDuration" type="number" placeholder="Enter exam Duration">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examTrainer">
+                                                    Trainer Name:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examTrainer" name="examTrainer" type="text" placeholder="Enter Trainer Name">
+                                            </div>
+
+                                            <br>
+                                            <div class="flex items-center justify-center">
+                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                                    Add Exam
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <form action="examlist.jsp" method="post">
+                                    <div class="grid gap-x-2 gap-y-30 grid-cols-3"  >
+                                        <div id="list-exams-content" class="hidden">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Exam Name</th>
+                                                        <th>Type</th>
+                                                        <th>Date</th>
+                                                        <th>Duration</th>
+                                                        <th>Trainer</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <c:forEach var="add_exam" items="${listOfExams}">
+                                                    <tr>
+                                                        <td>${add_exam.examName}</td>
+                                                        <td>${add_exam.examType}</td>
+                                                        <td>${add_exam.examDate}</td>
+                                                        <td>${add_exam.examDuration}</td>
+                                                        <td>${add_exam.examTrainer}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <div class="grid gap-x-2 gap-y-30 grid-cols-3">
+                                    <div id="add-section-content" class="hidden">
+                                        <h2 class="text-xl font-semibold mb-2">Schedule Exam</h2>
+                                        <form class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="sectionName">
+                                                    Exam Name:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sectionName" type="text" placeholder="Enter exam name">
+                                            </div>
+                                            <div class="flex items-center justify-center">
+                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                                    Schedule
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="grid gap-x-2 gap-y-30 grid-cols-3">
+                                    <div id="list-section-content" class="hidden">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Section Name</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="section" items="${listOfSections}">
+                                                <tr>
+                                                    <td>${section.name}</td>
+                                                    <td>${section.description}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="Question">
+                                    <div id="add-questions-content" class="hidden">
+                                        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">Add Questions</h2>
+                                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="AddQuestionServlet" method="post">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-800 text-sm font-bold mb-2" for="Exam name">
+                                                    Exam Name:
+                                                </label>
+                                                <input class="input" id="examName" name="examName" type="text" placeholder="Enter exam name">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-800 text-sm font-bold mb-2" for="questionText">
+                                                    Question Text:
+                                                </label>
+                                                <input class="input"  id="questions" name="questions" type="text"  placeholder="Enter question text">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-gray-800 text-sm font-bold mb-2" for="answerA">
+                                                        Answer A:
+                                                    </label>
+                                                    <input class="input" id="answerA" name="answerA" type="text" placeholder="Enter answer A">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-gray-800 text-sm font-bold mb-2" for="answerB">
+                                                        Answer B:
+                                                    </label>
+                                                    <input class="input" id="answerB" name="answerB" type="text" placeholder="Enter answer B">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-gray-800 text-sm font-bold mb-2" for="answerC">
+                                                        Answer C:
+                                                    </label>
+                                                    <input class="input" id="answerC" name="answerC" type="text" placeholder="Enter answer C">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-gray-800 text-sm font-bold mb-2" for="answerD">
+                                                        Answer D:
+                                                    </label>
+                                                    <input class="input" id="answerD" name="answerD" type="text" placeholder="Enter answer D">
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-800 text-sm font-bold mb-2" for="correctAnswer">
+                                                    Correct Answer (A, B, C, or D):
+                                                </label>
+                                                <input class="input" id="correctAnswer" name="correctAnswer" type="text" placeholder="Enter correct answer">
+                                            </div>
+                                            <div class="flex items-center justify-center mt-6">
+                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                                                    Add Question
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <form action="questionlist.jsp" method="post">
+                                    <div class="grid gap-x-2 gap-y-30 grid-cols-3">
+                                        <div id="list-questions-content" class="hidden">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Exam Name</th>
+                                                        <th>Question Text</th>
+                                                        <th>Option A</th>
+                                                        <th>Option B</th>
+                                                        <th>Option C</th>
+                                                        <th>Option D</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <c:forEach var="add_quest" items="${listOfQuestions}">
+                                                    <tr>
+                                                        <td>${add_quest.examName}</td>
+                                                        <td>${add_quest.questions}</td>
+                                                        <td>${add_quest.answerA}</td>
+                                                        <td>${add_quest.answerB}</td>
+                                                        <td>${add_quest.answerC}</td>
+                                                        <td>${add_quest.answerD}</td>
+                                                        <td>${add_quest.correctAnswer}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="grid gap-cols-3 row-gap-2 col-gap-5">
+
+                                    <div id="result-section-content" class="hidden">
+                                        <h2 class="text-xl font-semibold mb-2">Add Results</h2>
+
+                                        <form class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4" action="#" method="post">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="examName">
+                                                    Exam Name:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="examName" name="examName" type="text" placeholder="Enter exam name">
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="studentId">
+                                                    student Id:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="studentId" name="studentId" type="text" placeholder="Enter Trainer Name">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="studentMarks">
+                                                    student marks:
+                                                </label>
+                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="studentMarks" name="studentMarks" type="text" placeholder="Enter Trainer Name">
+                                            </div>
+
+                                            <br>
+                                            <div class="flex items-center justify-center">
+                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                                    Add Result
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </main>
+                        </div>
+
+
+
+
+
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Get all main options with dropdowns
+                                const optionsWithDropdown = document.querySelectorAll(".option-with-dropdown");
+
+                                // Add click event to each main option
+                                optionsWithDropdown.forEach(function (option) {
+                                    option.addEventListener("click", function () {
+                                        // Get the associated dropdown
+                                        const dropdown = option.querySelector(".dropdown-menu");
+
+                                        // Toggle the "hidden" class to show or hide the dropdown
+                                        dropdown.classList.toggle("hidden");
+                                    });
+                                });
+
+                                // Show content based on dropdown clicks
+                                const addExamsContent = document.getElementById("add-exams-content");
+                                const listExamsContent = document.getElementById("list-exams-content");
+                                const addSectionContent = document.getElementById("add-section-content");
+                                const listSectionContent = document.getElementById("list-section-content");
+                                const addQuestionsContent = document.getElementById("add-questions-content");
+                                const listQuestionsContent = document.getElementById("list-questions-content");
+                                const resultSectionContent = document.getElementById("result-section-content");
+
+                                const hideAllContent = () => {
+                                    addExamsContent.classList.add("hidden");
+                                    listExamsContent.classList.add("hidden");
+                                    addSectionContent.classList.add("hidden");
+                                    listSectionContent.classList.add("hidden");
+                                    addQuestionsContent.classList.add("hidden");
+                                    listQuestionsContent.classList.add("hidden");
+                                    resultSectionContent.classList.add("hidden");
+                                };
+
+                                document.getElementById("add-exams").addEventListener("click", function () {
+                                    hideAllContent();
+                                    addExamsContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("list-exams").addEventListener("click", function () {
+                                    hideAllContent();
+                                    listExamsContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("add-section").addEventListener("click", function () {
+                                    hideAllContent();
+                                    addSectionContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("list-section").addEventListener("click", function () {
+                                    hideAllContent();
+                                    listSectionContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("add-questions").addEventListener("click", function () {
+                                    hideAllContent();
+                                    addQuestionsContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("list-questions").addEventListener("click", function () {
+                                    hideAllContent();
+                                    listQuestionsContent.classList.remove("hidden");
+                                });
+
+                                document.getElementById("view-results").addEventListener("click", function () {
+                                    hideAllContent();
+                                    resultSectionContent.classList.remove("hidden");
+                                });
+                            });
+                        </script>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const dropdownButton = document.querySelector(".group button");
+                                const dropdownMenu = document.querySelector(".group ul");
+
+                                // Toggle the dropdown menu when the button is clicked
+                                dropdownButton.addEventListener("click", function (event) {
+                                    event.stopPropagation(); // Prevent the click event from reaching the document
+
+                                    // Toggle the visibility of the dropdown menu
+                                    if (dropdownMenu.style.display === "block") {
+                                        dropdownMenu.style.display = "none";
+                                    } else {
+                                        dropdownMenu.style.display = "block";
+                                    }
+                                });
+
+                                // Close the dropdown menu when clicking anywhere outside of it
+                                document.addEventListener("click", function (event) {
+                                    if (dropdownMenu.style.display === "block" &&
+                                            !dropdownButton.contains(event.target) &&
+                                            !dropdownMenu.contains(event.target)) {
+                                        dropdownMenu.style.display = "none";
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <!-- Add this code inside the <script> tag in your HTML -->
+
+
+                        </body>
+                        </html>
