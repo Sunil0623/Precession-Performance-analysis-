@@ -1,0 +1,548 @@
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Portal</title>
+        <link rel="icon" type="x-icon" href="fav.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="Stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .header{
+                min-height: 100vh;
+                width: 100%;
+                background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(academy.png);
+                background-position: center;
+                background-size: cover;
+                position: relative;
+            }
+
+            nav{
+                display: flex;
+                padding: 2% 6%;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav img {
+                width: 150px;
+            }
+
+            .nav-links{
+                flex: 1;
+                text-align: right;
+
+            }
+
+            .nav-links ul li{
+                list-style: none;
+                display: inline-block;
+                padding: 8px 12px;
+                position: relative;
+            }
+            .nav-links ul li a{
+                color: white;
+                text-decoration: none;
+                font-size: 12px;
+            }
+            .nav-links ul li::after {
+                content: '';
+                width: 0%;
+                height: 2px;
+                background: #f44336;
+                display: block;
+                margin: auto;
+                transition: 0.5s;
+            }
+            .nav-links ul li:hover::after{
+                width: 100%;
+
+            }
+            .text-box {
+                width: 90%;
+                color: #fff;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                text-align: center;
+            }
+            .text-box h1 {
+                font-size: 62px;
+
+            }
+            .text-box p {
+                margin: 10px 0 40px;
+                font-size: 14px;
+                color: #fff;
+            }
+            .hero-btn {
+                display: inline-block;
+                text-decoration: none;
+                color: #fff;
+                border: 1px solid #fff;
+                padding: 12px 34px;
+                font-size: 13px;
+                background: transparent;
+                position: relative;
+                cursor: pointer;
+            }
+            .hero-btn:hover{
+                border: 1px solid #f44336;
+                background: #f44336;
+                transition: 0.4s;
+
+            }
+
+            nav .fa {
+                display: none;
+            }
+            @media(max-width: 700px){
+                .text-box h1 {
+                    font-size: 20px;
+                }
+                .nav-links ul li{
+                    display: block;
+                }
+                .nav-links {
+                    position: absolute;
+                    background: #f44336;
+                    height: 100vh;
+                    width: 200px;
+                    top: 0;
+                    right: -200;
+                    text-align: left;
+                    z-index: 2;
+                    transition: 1s;
+
+                }
+                nav .fa{
+                    display: block;
+                    color: #fff;
+                    margin: 10px;
+                    font-size: 22px;
+                    cursor: pointer;
+                }
+                .nav-links ul {
+                    padding: 30px;
+
+                }
+            }
+            /* course */
+
+            .course{
+                width: 100%;
+                height: auto;
+                text-align: center;
+                padding-top: 100px;
+            }
+            h1{
+                font-size: 36px;
+                font-weight: 600;
+
+            }
+            p{
+                color: #777;
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 22px;
+                padding: 10px;
+            }
+
+            .row {
+                margin-top: 5%;
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+            }
+            .course-col {
+                flex-basis: 31%;
+                background-color: #fff3f3;
+                border-radius: 10px;
+                margin-bottom: 5px;
+                padding: 20px 12px;
+                box-sizing: border-box;
+                transition: 0.5s;
+            }
+            h3 {
+                text-align: center;
+                font-weight: 600;
+                margin: 10px 0;
+            }
+            .course-col:hover {
+                box-shadow: 0 0 20px 0px rgba(0,0,0,0.75);
+            }
+            @media(max-width: 780px){
+                .row {
+                    flex-direction: column;
+                }
+            }
+
+            .campus{
+                width: 80%;
+                margin: auto;
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .campus-col {
+                flex-basis: 32%;
+                border-radius: 10px;
+                margin-bottom: 30px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .campus-col img{
+                width: 100%;
+                display: block;
+            }
+
+            .layer {
+                background: transparent;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: 0.5s;
+
+            }
+            .layer:hover {
+                background: rgba(226,0,0,0.7);
+            }
+            .layer h3{
+                width: 100%;
+                font-weight: 500;
+                color: #fff;
+                font-size: 26px;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                position: absolute;
+                opacity: 0;
+                transition: 0.5s;
+            }
+            .layer:hover h3{
+                bottom: 49%;
+                opacity: 1;
+            }
+            .facilities{
+                width: 80%;
+                margin: auto;
+                text-align: center;
+                padding-top: 100px;
+            }
+            .facilities-col {
+                flex-basis: 31%;
+                border-radius: 10px;
+                margin-bottom: 5%;
+                text-align: left;
+            }
+
+            .facilities-col img {
+                width: 100%;
+                border-radius: 10px;
+            }
+            .facilities-col p{
+                padding: 0;
+            }
+            .facilities-col h3{
+                padding-top: 16px;
+                margin-bottom: 15px;
+                text-align: left;
+            }
+
+            .testimonials {
+                width: 80%;
+                margin: auto;
+                padding-top: 100px;
+                text-align: center;
+
+            }    
+            .testimonial-col {
+                flex-basis: 44%;
+                border-radius: 10px;
+                margin-bottom: 5%;
+                text-align: left;
+                background: #fff3f3;
+                padding: 25px;
+                cursor: pointer;
+                display: flex;
+            }
+            .testimonial-col img {
+                height: 40px;
+                margin-left: 5px;
+                margin-right: 30px;
+                border-radius: 50%;
+
+            }
+            testimonial-col p{
+                padding: 0;
+            }
+
+            .testimonial-col h3{
+                margin-top: 15px;
+                text-align: left;
+            }
+            .cta {
+                margin: 100px auto;
+                width: 80%;
+                background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("banner2.jpg");
+                background-position: center;
+                background-size: cover;
+                border-radius: 10px;
+                text-align: center;
+                padding: 100px 0;
+            }
+
+            .cta h1{
+                color: #fff;
+                margin-bottom: 40px;
+                padding: 0;
+            }
+            @media(max-width: 700px) {
+                .cta h1 {
+                    font-size: 24px;
+
+                }
+            }
+
+            .container {
+                width: 100%;
+                text-align: center;
+                padding: 30px 0;
+            }
+
+            .container h4{
+                margin-bottom: 25px;
+                margin-top: 20px;
+                font-weight: 600;
+            }
+
+
+
+            .align-items-center{
+                align-items: center!important;
+            }
+            .d-flex{
+                display: flex!important;
+            }
+            .fixed-top{
+                position:fixed;
+                right: 0;
+                left: 0;
+
+            }
+            *,::after, ::before{
+                box-sizing: border-box;
+            }
+            #myBtn {
+                display: none; /* Hidden by default */
+                position: fixed; /* Fixed/sticky position */
+                bottom: 20px; /* Place the button at the bottom of the page */
+                right: 30px; /* Place the button 30px from the right */
+                z-index: 99; /* Make sure it does not overlap */
+                border: none; /* Remove borders */
+                outline: none; /* Remove outline */
+                background-color: aquablue; /* Set a background color */
+                color: white; /* Text color */
+                cursor: pointer; /* Add a mouse pointer on hover */
+                padding: 15px; /* Some padding */
+                border-radius: 10px; /* Rounded corners */
+                font-size: 18px; /* Increase font size */
+            }
+
+            #myBtn:hover {
+                background-color: #555; /* Add a dark-grey background on hover */
+            }
+            footer{
+                background-color: #222;
+                color: white;
+                text-align: center;
+                padding: absolute;
+                bottom: 10px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="header" id="header">
+            <nav>
+                <a href="#"><img src="cafeteria.png" alt=""></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a class="nav-link scrollto active" href="#header">HOME</a></li>
+                        <li><a class="nav-link scrollto" href="#about">ABOUT</a></li>
+                        <li><a class="nav-link scrollto" href="#course">COURSE</a></li>
+                        <li><a href="student_login.jsp">LOGIN</a></li>
+
+                        <li><a href="adminlogin.jsp">ADMIN</a><li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+            <div class="text-box">
+                <h1>Worlds Biggest Academy</h1>
+                <p>Where Technology Meets Excellence
+                </p>
+                <a href="#course" class="hero-btn">Visit Us To Know More</a>
+            </div>
+        </section> 
+        <!--abcd-->
+        <section class="course" id="course">
+            <h1><u>Courses we offer</u></h1>
+            <div class="row">
+                <div class="course-col">
+                    <h3>Full Stack Java Developer Course</h3>
+                    <p>Kick start your career as a Full Stack Java Developer with our Placement Assured PG Diploma in Full Stack Java Developer Course.</p>
+
+                </div>
+                <div class="course-col">
+                    <h3>Leading Embedded Training Institute</h3>
+                    <p>The Placement Assured Program for PG Diploma in Embedded and Automotive Systems Course at Cranes Varsity, Bangalore ensures a smooth transition from learning to employment. </p>
+
+                </div>
+                <div class="course-col">
+                    <h3>Master Data Science Course</h3>
+                    <p>Our Academy offers a comprehensive online and offline Data Science course designed to equip you with the skills and knowledge needed to excel in this rapidly evolving field.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!--abcd-->    
+    <section class="about" id="about"> 
+        <section class="campus">
+            <h1><u>Our Global Campus</u></h1>
+            <div class="row">
+                <div class="campus-col">
+                    <img src="newyork.png" alt="">
+                    <div class="layer">
+                        <h3>Bangalore</h3>
+                    </div>
+                </div>
+                <div class="campus-col">
+                    <img src="newyork.png" alt="">
+                    <div class="layer">
+                        <h3>Chennai</h3>
+                    </div>
+                </div>
+                <div class="campus-col">
+                    <img src="newyork.png" alt="">
+                    <div class="layer">
+                        <h3>Hyderabad</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="facilities">
+            <h1><u>Our Facilities</u></h1>
+            <div class="row">
+                <div class="facilities-col">
+                    <img src="library.jpg" alt="">
+                    <h3>World Class Library</h3>
+                    <p>Libraries store the energy that fuels the imagination. They open up windows to the world and inspire us to explore and achieve, and contribute to improving our quality of life.</p>
+                </div>
+                <div class="facilities-col">
+                    <img src="ball.png" alt="">
+                    <h3>Largest playground</h3>
+                    <p>The hardest skill to acquire in this sport is the one where you compete all out, give it all you have, and you are still getting beat no matter what you do. When you have the killer instinct to fight through that, it is very special</p>
+                </div>
+                <div class="facilities-col">
+                    <img src="food.png" alt="">
+                    <h3>tasty and health food</h3>
+                    <p>If more of us valued food and cheer and song above hoarded gold, it would be a merrier world</p>
+                </div>
+            </div>
+
+        </section>
+        <section class="testimonials">
+            <h1>Whatever students says</h1>
+
+            <div class="row">
+                <div class="testimonial-col">
+                    <img src="logo.png" alt="">
+                    <div>
+                        <p>I have not that knowledge about placements here because I?m also new here, but I Personally feel that for engineering students this Academy is perfect. </p>
+                        <h3>Amritha</h3>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                </div>
+                <div class="testimonial-col">
+                    <img src="user2.jpg" alt="">
+                    <div>
+                        <p>My name is Sunil  , Mainly i wanted to thank this academy for guiding us in proper way and easy manner.</p>
+                        <h3>Sunil</h3>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </section>
+    <!--abcd-->
+    <!-- call to actions -->
+    <section class="contact" id="contact">
+        <section class="cta">
+            <h1>Enroll For Various Online Courses <br> Anywhere From The World</h1>
+            <a href="contact.jsp" class="hero-btn">CONTACT US</a>
+        </section>
+    </section>
+
+    <!-- -->
+    <footer>
+        <p>&copysr;2023 Eduford All rights reserved.</p>
+    </footer>
+    <!-- -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <script>
+        let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+// When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>
+
+
